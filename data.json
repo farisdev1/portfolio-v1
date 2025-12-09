@@ -1,0 +1,108 @@
+{
+    "profile": {
+        "name": "Antigravity",
+        "title": "Full-Stack Developer",
+        "tagline": "Building Digital Experiences That Matter.",
+        "description": "I'm a Senior Full-Stack Developer specializing in high-performance React applications and immersive web interfaces.",
+        "skills_description": "I bridge the gap between design and engineering. With 5 years of experience, I've led teams to build scalable SaaS platforms and award-winning marketing sites. My tech stack is focused on modern JavaScript ecosystems.",
+        "contact_text": "I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!",
+        "socials": {
+            "github": "#",
+            "linkedin": "#",
+            "twitter": "#"
+        }
+    },
+    "skills": [
+        {
+            "name": "React / Next.js",
+            "category": "Frontend"
+        },
+        {
+            "name": "TypeScript",
+            "category": "Frontend"
+        },
+        {
+            "name": "Node.js",
+            "category": "Backend"
+        },
+        {
+            "name": "Tailwind CSS",
+            "category": "Frontend"
+        },
+        {
+            "name": "PostgreSQL",
+            "category": "Backend"
+        },
+        {
+            "name": "AWS",
+            "category": "DevOps"
+        }
+    ],
+    "projects": [
+        {
+            "id": "neon-dash",
+            "title": "Neon Dash",
+            "description": "A high-performance analytics dashboard for e-commerce platforms. Features real-time data visualization, dark mode, and exportable reports.",
+            "image": "https://via.placeholder.com/600x400/0f172a/3b82f6?text=E-Commerce+Dashboard",
+            "tech": [
+                "React",
+                "D3.js",
+                "Tailwind"
+            ],
+            "links": {
+                "demo": "#",
+                "repo": "#"
+            },
+            "color": "primary"
+        },
+        {
+            "id": "mindlink-ai",
+            "title": "MindLink AI",
+            "description": "A conversational AI interface that mimics human interaction. Built with WebSockets for low latency and state-of-the-art NLP models.",
+            "image": "https://via.placeholder.com/600x400/0f172a/10b981?text=AI+Chat+Interface",
+            "tech": [
+                "Next.js",
+                "OpenAI API",
+                "Socket.io"
+            ],
+            "links": {
+                "demo": "#",
+                "repo": "#"
+            },
+            "color": "secondary"
+        },
+        {
+            "id": "cryptoflow",
+            "title": "CryptoFlow",
+            "description": "A decentralized exchange frontend connecting to multiple blockchains. Focuses on security, transaction speed, and gas optimization.",
+            "image": "https://via.placeholder.com/600x400/0f172a/8b5cf6?text=DeFi+Exchange",
+            "tech": [
+                "Vue 3",
+                "Ethers.js",
+                "Solidity"
+            ],
+            "links": {
+                "demo": "#",
+                "repo": "#"
+            },
+            "color": "purple-500"
+        }
+    ],
+    "blog": [
+        {
+            "title": "Why I Switched to Tailwind CSS",
+            "date": "Dec 08, 2025",
+            "excerpt": "Utility-first CSS frameworks are controversial, but here's why they speed up development..."
+        },
+        {
+            "title": "Mastering React Hooks",
+            "date": "Nov 25, 2025",
+            "excerpt": "Understanding useEffect and useCallback is crucial for preventing performance bottlenecks..."
+        },
+        {
+            "title": "The Future of Web Assembly",
+            "date": "Nov 10, 2025",
+            "excerpt": "How WASM is changing the landscape of browser-based heavy computing..."
+        }
+    ]
+}

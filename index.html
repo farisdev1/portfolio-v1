@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevPortfolio | Full Stack Developer</title>
+    <meta name="description" content="Portfolio of a Senior Full-Stack Developer specializing in React and Modern UI.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: '#10b981', // Emerald 500
+                        secondary: '#3b82f6', // Blue 500
+                        dark: '#0f172a', // Slate 900
+                        card: '#1e293b', // Slate 800
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'cursor-blink': 'blink 1s step-end infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-dark text-slate-300 font-sans transition-colors duration-300 selection:bg-primary selection:text-white overflow-x-hidden">
+
+    <!-- Terminal Toggle Button -->
+    <button id="terminal-toggle"
+        class="fixed bottom-6 right-6 z-50 p-4 bg-black/80 backdrop-blur-md border border-primary/30 rounded-full shadow-lg hover:shadow-primary/50 transition-all duration-300 group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary group-hover:rotate-12 transition-transform"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+    </button>
+
+    <!-- Terminal Overlay (Hidden by default) -->
+    <div id="terminal-overlay"
+        class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div
+            class="w-full max-w-3xl bg-[#0d1117] border border-slate-700 rounded-lg shadow-2xl overflow-hidden flex flex-col h-[600px] font-mono relative terminal-window">
+            <!-- Terminal Header -->
+            <div class="bg-slate-800 px-4 py-2 flex items-center justify-between border-b border-slate-700 select-none">
+                <div class="flex space-x-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 cursor-pointer" id="close-terminal">
+                    </div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <div class="text-xs text-slate-400">guest@portfolio: ~</div>
+                <div></div>
+            </div>
+            <!-- Terminal Body -->
+            <div class="flex-1 p-4 overflow-y-auto custom-scrollbar text-sm" id="terminal-output">
+                <div class="mb-4 text-slate-400">
+                    <p>Microsoft Windows [Version 10.0.19045.3803]</p>
+                    <p>(c) Microsoft Corporation. All rights reserved.</p>
+                    <br>
+                    <p class="text-primary">Welcome to the interactive portfolio v1.0.0</p>
+                    <p>Type <span class="text-white font-bold">'help'</span> to see available commands.</p>
+                </div>
+                <!-- Dynamic Content Here -->
+            </div>
+            <!-- Input Area -->
+            <div class="p-4 bg-[#0d1117] border-t border-slate-800 flex items-center">
+                <span class="text-primary mr-2 font-bold">➜</span>
+                <span class="text-secondary mr-2 font-bold">~</span>
+                <input type="text" id="terminal-input"
+                    class="flex-1 bg-transparent border-none outline-none text-white focus:ring-0 placeholder-slate-600"
+                    placeholder="Type a command..." autocomplete="off">
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav
+        class="fixed top-0 w-full z-30 bg-dark/80 backdrop-blur-md border-b border-slate-800/50 dark:bg-dark/80 dark:border-slate-800/50 bg-white/80 border-slate-200/50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold tracking-tighter text-slate-800 dark:text-white transition-colors">
+                <span class="text-primary">&lt;</span>Dev<span class="text-secondary">/&gt;</span>
+            </a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium items-center text-slate-600 dark:text-slate-300">
+                <a href="#about" class="hover:text-primary transition-colors">About</a>
+                <a href="#projects" class="hover:text-primary transition-colors">Projects</a>
+                <a href="#blog" class="hover:text-primary transition-colors">Blog</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+                <button onclick="document.getElementById('terminal-toggle').click()"
+                    class="text-primary hover:underline">Terminal</button>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle"
+                    class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    <!-- Sun Icon -->
+                    <svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 hidden"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <!-- Moon Icon -->
+                    <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+        class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden bg-white dark:bg-dark transition-colors duration-300">
+        <!-- Background Effects -->
+        <div
+            class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[128px] opacity-40 animate-blob">
+        </div>
+        <div
+            class="absolute top-0 right-1/4 w-96 h-96 bg-secondary/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[128px] opacity-40 animate-blob animation-delay-2000">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div
+                class="inline-flex items-center px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100/50 dark:bg-slate-800/50 backdrop-blur-sm text-xs font-medium text-primary mb-8 animate-fade-in-up">
+                <span class="flex w-2 h-2 bg-primary rounded-full mr-2 animate-pulse"></span>
+                Available for new projects
+            </div>
+            <h1
+                class="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6 leading-tight transition-colors">
+                Building Digital <br class="hidden md:block" />
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Experiences</span>
+                That Matter.
+            </h1>
+            <p
+                class="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed transition-colors">
+                I'm a Senior Full-Stack Developer specializing in high-performance <span
+                    class="text-slate-900 dark:text-white font-semibold">React</span> applications and immersive web
+                interfaces.
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+                <a href="#projects"
+                    class="px-8 py-3 bg-slate-900 dark:bg-white text-white dark:text-dark font-bold rounded-lg hover:opacity-90 transition-all transform hover:-translate-y-1 shadow-lg shadow-primary/10">
+                    View Projects
+                </a>
+                <button onclick="document.getElementById('terminal-toggle').click()"
+                    class="px-8 py-3 border border-slate-300 dark:border-slate-600 rounded-lg font-medium hover:border-primary hover:text-primary transition-all flex items-center gap-2 bg-transparent">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Open Terminal
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-slate-50 dark:bg-[#0B1120] transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <div class="w-full md:w-1/2">
+                    <div class="relative group">
+                        <div
+                            class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200">
+                        </div>
+                        <div
+                            class="relative bg-white dark:bg-card rounded-2xl p-2 md:p-4 rotate-3 group-hover:rotate-0 transition-all duration-300">
+                            <img src="https://via.placeholder.com/600x400/1e293b/10b981?text=Developer+Profile"
+                                alt="Profile"
+                                class="rounded-xl w-full shadow-2xl grayscale hover:grayscale-0 transition-all duration-500">
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2" id="about-content">
+                    <!-- Dynamic Content Will Be Loaded Here -->
+                    <div class="animate-pulse space-y-4">
+                        <div class="h-8 bg-slate-200 dark:bg-slate-700 rounded w-1/3"></div>
+                        <div class="h-24 bg-slate-200 dark:bg-slate-700 rounded"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Sub-Section -->
+            <div class="mt-20">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 text-center">Technical Expertise</h3>
+                <div id="skills-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <!-- Dynamic Skills Will Be Loaded Here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative overflow-hidden bg-white dark:bg-dark transition-colors duration-300">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-wrap items-center justify-between mb-16 gap-4">
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+                    <span class="text-primary">02.</span> Featured Projects
+                </h2>
+                <a href="#"
+                    class="text-primary hover:text-slate-900 dark:hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+                    View Github <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+            </div>
+
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamic Projects Will Be Loaded Here -->
+                <div class="col-span-full text-center text-slate-500">Loading projects...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-24 bg-slate-50 dark:bg-[#0B1120] transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 flex items-center gap-3">
+                <span class="text-primary">03.</span> Latest Thoughts
+            </h2>
+            <div id="blog-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Dynamic Blog Posts Will Be Loaded Here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white dark:bg-dark transition-colors duration-300">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2
+                    class="text-3xl font-bold text-slate-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+                    <span class="text-primary">04.</span> Get In Touch
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400">
+                    I'm currently looking for new opportunities. Whether you have a question or just want to say hi,
+                    I'll try my best to get back to you!
+                </p>
+            </div>
+
+            <div
+                class="bg-white dark:bg-card p-8 md:p-12 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl transition-colors duration-300">
+                <form class="space-y-6"
+                    onsubmit="event.preventDefault(); document.getElementById('terminal-toggle').click();">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label for="name"
+                                class="text-sm font-medium text-slate-700 dark:text-slate-300">Name</label>
+                            <input type="text" id="name"
+                                class="w-full bg-slate-50 dark:bg-dark border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                                placeholder="John Doe">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="email"
+                                class="text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
+                            <input type="email" id="email"
+                                class="w-full bg-slate-50 dark:bg-dark border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                                placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="message"
+                            class="text-sm font-medium text-slate-700 dark:text-slate-300">Message</label>
+                        <textarea id="message" rows="4"
+                            class="w-full bg-slate-50 dark:bg-dark border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"
+                            placeholder="Hello, I'd like to talk about..."></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold py-4 rounded-lg hover:shadow-lg hover:shadow-primary/25 transition-all transform hover:-translate-y-1">
+                        Send Message
+                    </button>
+                    <p class="text-center text-xs text-slate-500 mt-4">
+                        * This form is a demo. Clicking send will open the terminal.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+        class="py-8 text-center text-slate-500 text-sm border-t border-slate-200 dark:border-slate-800/50 bg-slate-50 dark:bg-dark transition-colors duration-300">
+        <p>Designed & Built by <span class="text-primary font-mono">Antigravity</span></p>
+        <div class="flex justify-center gap-4 mt-4">
+            <a href="#" class="hover:text-primary transition-colors">Github</a>
+            <a href="#" class="hover:text-primary transition-colors">LinkedIn</a>
+            <a href="#" class="hover:text-primary transition-colors">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
